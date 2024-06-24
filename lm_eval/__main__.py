@@ -445,4 +445,58 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
 
 
 if __name__ == "__main__":
-    cli_evaluate()
+    parser = setup_parser()
+
+    # MODEL_ARGS = ["pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",
+    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True,peft=/nvmestore/mjazbec/lora_output/mistralai/Mistral-7B-Instruct-v0.3/2024-06-19_14-25-23",
+    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",
+    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",
+    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True,peft=/nvmestore/mjazbec/lora_output/mistralai/Mistral-7B-Instruct-v0.3/2024-06-19_14-25-23",
+    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True,peft=/nvmestore/mjazbec/lora_output/mistralai/Mistral-7B-Instruct-v0.3/2024-06-19_14-25-23"
+    #               ]
+    # NR_SHOTS = [0, 0, 1, 8, 1, 8]
+    # BATCH_SIZE = [100, 100, 100, 20, 100, 20]
+
+    # MODEL_ARGS = ["pretrained=/nvmestore/mjazbec/huggingface/hub/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/e1945c40cd546c78e41f1151f4db032b271faeaa,load_in_8bit=True",
+    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/e1945c40cd546c78e41f1151f4db032b271faeaa,load_in_8bit=True",
+    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/e1945c40cd546c78e41f1151f4db032b271faeaa,load_in_8bit=True"
+    #               ]
+    # NR_SHOTS = [0, 1, 8]
+    # BATCH_SIZE = [20, 20, 5]
+
+    # MODEL_ARGS = ["pretrained=/nvmestore/mjazbec/huggingface/hub/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/e1945c40cd546c78e41f1151f4db032b271faeaa,load_in_8bit=True",]
+    MODEL_ARGS = ["pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",]
+    NR_SHOTS = [0]
+    BATCH_SIZE = [50]
+
+    for model_args, nr_shots, batch_size in zip(MODEL_ARGS, NR_SHOTS, BATCH_SIZE):
+    
+        # Manually set the arguments as if they were passed from the command line
+        args_list = [
+            "--model", "hf",
+            "--model_args", model_args,
+            # "--model_args", "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",
+            # "--model_args", "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True,peft=/nvmestore/mjazbec/lora_output/mistralai/Mistral-7B-Instruct-v0.3/2024-06-19_14-25-23",
+            # "--model_args", "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True,peft=/nvmestore/mjazbec/lora_output/mistralai/Mistral-7B-Instruct-v0.3/2024-06-18_18-00-47",
+            "--tasks", "gsm8k",
+            "--device", "cuda:0",
+            # "--batch_size", "20",
+            "--batch_size", str(batch_size),
+            # "--num_fewshot", "8",
+            "--num_fewshot", str(nr_shots),
+            "--output_path", "output/",
+            "--limit", "100",
+            "--gen_kwargs", "temperature=1.0",
+            "--log_samples",
+            "--apply_chat_template",
+            # "--fewshot_as_multiturn"
+        ]
+        
+        # Parse the manually set arguments
+        args = parser.parse_args(args_list)
+        
+        # Print the parsed arguments for verification
+        print(args)
+
+        # Call the cli_evaluate function with the parsed arguments
+        cli_evaluate(args)

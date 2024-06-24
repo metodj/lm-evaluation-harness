@@ -58,7 +58,7 @@ def simple_evaluate(
     log_samples: bool = True,
     evaluation_tracker: Optional[EvaluationTracker] = None,
     system_instruction: Optional[str] = None,
-    apply_chat_template: bool = False,
+    apply_chat_template: bool = True,
     fewshot_as_multiturn: bool = False,
     gen_kwargs: Optional[str] = None,
     task_manager: Optional[TaskManager] = None,

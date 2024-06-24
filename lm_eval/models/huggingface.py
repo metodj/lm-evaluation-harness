@@ -839,6 +839,14 @@ class HFLM(TemplateLM):
         stopping_criteria = stop_sequences_criteria(
             self.tokenizer, stop, context.shape[1], context.shape[0]
         )
+
+        # print('BANANA')
+        # print(type(context))
+        # print(context.shape)
+        # print(max_length)
+        # print(generation_kwargs['attention_mask'])
+        # print(generation_kwargs.keys())
+
         return self.model.generate(
             input_ids=context,
             max_length=max_length,
@@ -1265,6 +1273,15 @@ class HFLM(TemplateLM):
 
             if "max_length" not in kwargs:
                 kwargs["max_length"] = context_enc.shape[1] + max_gen_toks
+
+            # print(context_enc.shape)
+            # print('KEKEC')
+            # print(attn_masks.shape)
+            # print(attn_masks)
+
+            # for i in range(attn_masks.shape[0]):
+            #     print(i)
+            #     print(attn_masks[i])
 
             # perform batched generation
             cont = self._model_generate(
