@@ -447,15 +447,15 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
 if __name__ == "__main__":
     parser = setup_parser()
 
-    # MODEL_ARGS = ["pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",
-    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True,peft=/nvmestore/mjazbec/lora_output/mistralai/Mistral-7B-Instruct-v0.3/2024-06-19_14-25-23",
-    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",
-    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",
-    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True,peft=/nvmestore/mjazbec/lora_output/mistralai/Mistral-7B-Instruct-v0.3/2024-06-19_14-25-23",
-    #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True,peft=/nvmestore/mjazbec/lora_output/mistralai/Mistral-7B-Instruct-v0.3/2024-06-19_14-25-23"
-    #               ]
-    # NR_SHOTS = [0, 0, 1, 8, 1, 8]
-    # BATCH_SIZE = [100, 100, 100, 20, 100, 20]
+    MODEL_ARGS = ["pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",
+                  "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True,peft=/nvmestore/mjazbec/lora_output/mistralai/Mistral-7B-Instruct-v0.3/2024-06-19_14-25-23",
+                  "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",
+                  "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",
+                  "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True,peft=/nvmestore/mjazbec/lora_output/mistralai/Mistral-7B-Instruct-v0.3/2024-06-19_14-25-23",
+                  "pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True,peft=/nvmestore/mjazbec/lora_output/mistralai/Mistral-7B-Instruct-v0.3/2024-06-19_14-25-23"
+                  ]
+    NR_SHOTS = [0, 0, 1, 8, 1, 8]
+    BATCH_SIZE = [100, 100, 100, 20, 100, 20]
 
     # MODEL_ARGS = ["pretrained=/nvmestore/mjazbec/huggingface/hub/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/e1945c40cd546c78e41f1151f4db032b271faeaa,load_in_8bit=True",
     #               "pretrained=/nvmestore/mjazbec/huggingface/hub/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/e1945c40cd546c78e41f1151f4db032b271faeaa,load_in_8bit=True",
@@ -464,10 +464,10 @@ if __name__ == "__main__":
     # NR_SHOTS = [0, 1, 8]
     # BATCH_SIZE = [20, 20, 5]
 
-    # MODEL_ARGS = ["pretrained=/nvmestore/mjazbec/huggingface/hub/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/e1945c40cd546c78e41f1151f4db032b271faeaa,load_in_8bit=True",]
-    MODEL_ARGS = ["pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",]
-    NR_SHOTS = [0]
-    BATCH_SIZE = [50]
+    # # MODEL_ARGS = ["pretrained=/nvmestore/mjazbec/huggingface/hub/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/e1945c40cd546c78e41f1151f4db032b271faeaa,load_in_8bit=True",]
+    # MODEL_ARGS = ["pretrained=/nvmestore/mjazbec/huggingface/hub/models--mistralai--Mistral-7B-Instruct-v0.3/snapshots/83e9aa141f2e28c82232fea5325f54edf17c43de,load_in_8bit=True",]
+    # NR_SHOTS = [0]
+    # BATCH_SIZE = [50]
 
     for model_args, nr_shots, batch_size in zip(MODEL_ARGS, NR_SHOTS, BATCH_SIZE):
     
@@ -486,7 +486,7 @@ if __name__ == "__main__":
             "--num_fewshot", str(nr_shots),
             "--output_path", "output/",
             "--limit", "100",
-            "--gen_kwargs", "temperature=1.0",
+            "--gen_kwargs", "temperature=1.0,max_new_tokens=500",
             "--log_samples",
             "--apply_chat_template",
             # "--fewshot_as_multiturn"

@@ -847,6 +847,10 @@ class HFLM(TemplateLM):
         # print(generation_kwargs['attention_mask'])
         # print(generation_kwargs.keys())
 
+        print(generation_kwargs.keys())
+        print(generation_kwargs['do_sample'])
+        print(generation_kwargs['temperature'])
+
         return self.model.generate(
             input_ids=context,
             max_length=max_length,
